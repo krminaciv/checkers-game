@@ -22,7 +22,7 @@ public class Server {
 
 			serverSocket = new ServerSocket(7777);
 			System.out.println("server starting...");
-			
+			 
 			while(numOfPlayers <= 2){
 				numOfPlayers++;
 

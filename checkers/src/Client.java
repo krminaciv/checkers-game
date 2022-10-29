@@ -6,9 +6,11 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Client extends Application {
@@ -19,6 +21,11 @@ public class Client extends Application {
 
 	static int playerID = -1;
 	static Player me, opponent;
+
+	//GUI
+	private Tile[][] board = new Tile[8][8];
+     public static final int TILE_SIZE = 50;
+     private Group tileGroup = new Group();
 
      public static void main(String[] args) {
 		
@@ -107,14 +114,26 @@ public class Client extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		BorderPane root = new BorderPane();
+		Pane root = new Pane();
+       	root.setPrefSize(8*TILE_SIZE, 8*TILE_SIZE);
+        	root.getChildren().addAll(tileGroup);
 
-		Label title = new Label("klijent " + me.playerID);
-		root.setTop(title);
+        	for(int y = 0 ; y < 8; y++){
+            	for(int x = 0 ; x < 8 ; x++){
 
-		Scene scene = new Scene(root, 500, 500);
+				Tile tile = new Tile((x+y)%2 == 0, x,y);
+				board[x][y] = tile;
+				tileGroup.getChildren().add(tile);
+
+				//dodati Piece ako trb...
+
+            	}
+        	}
+
+
+        	Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Klijent" + me.playerID);
+		primaryStage.setTitle("Klijent " + me.playerID);
 		primaryStage.show();
 		
 	}
