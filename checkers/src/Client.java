@@ -26,6 +26,7 @@ public class Client extends Application {
 	private Tile[][] board = new Tile[8][8];
      public static final int TILE_SIZE = 50;
      private Group tileGroup = new Group();
+	private Group pieceGroup = new Group();
 
      public static void main(String[] args) {
 		
@@ -116,7 +117,7 @@ public class Client extends Application {
 		
 		Pane root = new Pane();
        	root.setPrefSize(8*TILE_SIZE, 8*TILE_SIZE);
-        	root.getChildren().addAll(tileGroup);
+        	root.getChildren().addAll(tileGroup, pieceGroup);
 
         	for(int y = 0 ; y < 8; y++){
             	for(int x = 0 ; x < 8 ; x++){
@@ -125,7 +126,18 @@ public class Client extends Application {
 				board[x][y] = tile;
 				tileGroup.getChildren().add(tile);
 
-				//dodati Piece ako trb...
+				Piece piece = null;
+
+				if(y <= 2 && (x+y)%2 != 0){
+					piece = new Piece(0,x,y);
+				}
+				if(y >= 5 && (x+y)%2 != 0){
+					piece = new Piece(1,x,y);
+				}
+				if(piece != null){
+					tile.setPiece(piece);
+					pieceGroup.getChildren().add(piece);
+				}
 
             	}
         	}
