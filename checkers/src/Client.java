@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -43,7 +42,7 @@ public class Client extends Thread {
 					break;
 				if (serverMessage.contains("?"))
 					quiz.setQuestion(serverMessage);
-				else 
+				else
 					quiz.setText(serverMessage);
 			}
 
